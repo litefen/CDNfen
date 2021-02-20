@@ -156,6 +156,9 @@ html.night {
 .night-mode .dropdown-menu>li>a {
 	color:#fff!important
 }
+.night-mode .list-group-item .blog-info-icons svg path{
+    fill: #a0a0a0!important;
+}
 .night-mode .comment-content-true a,.wrapper-lg .entry-content a {
 	color:rgba(255,255,255,.65);
 	border-bottom:1px solid rgba(255,255,255,.65)

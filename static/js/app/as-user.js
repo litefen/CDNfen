@@ -242,6 +242,13 @@ function strPage(){
     return strPage;
 }
 
+// 获取URL GET参数
+function GetQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
+
 // 根据屏幕分辨率
 function IsPhone() {
     mobile_flag = false;
@@ -266,19 +273,35 @@ if(strPage() == "plugins.php"){
     $(".typecho-list-table:eq(1) tbody tr").find("td:eq(4)").find("a:eq(0)").html("<i class=\"fa fa-check\"></i>");
     
     // 获取已启用插件的长度
-    var EnabePL = $("table.typecho-list-table:eq(0) tbody").children().size();
+    let EnabePL = $("table.typecho-list-table:eq(0) tbody").children().size();
     
-    for (var i=0; i<EnabePL; i++){
+    for (let i=0; i<EnabePL; i++){
         
         // 获取启用插件的ID
-    	var PLID = $("table.typecho-list-table:eq(0) tbody tr:eq("+i+")").attr("id");
+    	let PLID = $("table.typecho-list-table:eq(0) tbody tr:eq("+i+")").attr("id");
     	
-        var PTDL = $("table.typecho-list-table:eq(0) tbody tr:eq("+i+") td:eq(4)").children().size()
+        let PTDL = $("table.typecho-list-table:eq(0) tbody tr:eq("+i+") td:eq(4)").children().size();
         
         if(PTDL == 1){
             
             // 修改插件禁用按钮
-            $("#"+PLID+" td:eq(4) a").html("<i class=\"fa fa-close\"></i>");
+            // $("#"+PLID+" td:eq(4) a").html("<i class=\"fa fa-close\"></i>");
+            
+            var tag = $("#"+PLID).find("td:eq(4) a").text();
+            
+            if(tag.indexOf("设置") >= 0){
+                
+                $(function(){
+                    $("#"+PLID+" td:eq(4) a").html("<i class=\"fa fa-cog\"></i>");
+                })
+                
+            }else if(tag.indexOf("禁用") >= 0){
+                
+                $(function(){
+                    $("#"+PLID+" td:eq(4) a").html("<i class=\"fa fa-close\"></i>");
+                })
+                
+            }
             
         }else if(PTDL == 2){
             
@@ -315,6 +338,25 @@ if(strPage() == "plugins.php"){
         $("button.btn.primary").attr("id","as-primary");
     })
     
+}
+
+// 判断是否是插件设置页面
+if(strPage() == "options-plugin.php" && GetQueryString("config") == "AliceStyle"){
+    
+    let key = $("input[name='RandomImg']").val();
+        
+    $("input[name='RandomImg']").blur(function () {
+        
+        let val = $(this).val().trim();
+        
+        if(key != val){
+            
+            let url = SiteLink + "usr/plugins/AliceStyle/inc/api/img/?" + val;
+            
+            $("#as-save").after("<a href=\""+url+"\" class=\"btn primary\" id=\"as-url\"><i class=\"fa fa-send\"></i></a>");
+        }
+        
+    });
 }
 
 // 判断插件添加的入口数据是否为空
@@ -375,8 +417,9 @@ $("#btn-submit").html("<i class=\"fa fa-send\"></i>");
 
 // 后台彩色标签云
 let tags = document.querySelectorAll("ul.typecho-list-notable.tag-list.clearfix .size-5");
-let colorArr = ["#428BCA", "#AEDCAE", "#ECA9A7", "#DA99FF", "#FFB380", "#D9B999"];
+let colorArr = ["#86d2f3","#a3dbf3","#5dbde7","#6b7ceb","#919ff5","#abb6f5"];
 tags.forEach(tag => {
     tagsColor = colorArr[Math.floor(Math.random() * colorArr.length)];
     tag.style.backgroundColor = tagsColor;
 });
+

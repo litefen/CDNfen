@@ -153,6 +153,9 @@ html.night {
 .night-mode h5.widget-title.m-t-none.text-md,.night-mode ul.list-group.box-shadow-wrap-normal{
     color: #a0a0a0!important;
 }
+.night-mode .list-group-item .blog-info-icons svg path{
+    fill: #a0a0a0!important;
+}
 .night-mode  .text-second a {
 	color: #a0a0a0 !important;
 }

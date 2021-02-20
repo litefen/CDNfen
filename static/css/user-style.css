@@ -60,7 +60,7 @@ a {
     box-shadow: var(--card-shadow-inset);
     transition: var(--as-transition);
 }
-.message.popup.error {
+.message.popup.error,.message.popup.success {
     z-index: 99999;
 }
 section.btn-set-03 {
@@ -136,10 +136,24 @@ button#text_ok:hover, button#hplayer_cancel:hover,button#text_cancel:hover,butto
     height: 50px;
     box-shadow: 0 2px 6px 0 rgba(114,124,245,.5);
 }
-#as-save:hover{
+#as-save:hover,#as-url:hover{
     color: #fff!important;
     background-color: #4e5bf2!important;
     border-color: #4250f2!important;
+}
+#as-url{
+    color: white;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    right: 10%;
+    bottom: 16%;
+    border-radius: 30px;
+    font-size: 1.6em;
+    background: #7886fd!important;
+    width: 27px;
+    height: 50px;
+    box-shadow: 0 2px 6px 0 rgba(114,124,245,.5);
 }
 .inner:hover {
     background: rgb(117 128 249)!important;
